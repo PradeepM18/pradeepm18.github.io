@@ -1,0 +1,64 @@
+# Copy this file to .github/workflows/deploy-chat.yml in your GitHub repository.
+name: Deploy portfolio chat backend
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: portfolio-chat-deployment
+  cancel-in-progress: false
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: portfolio-chat
+    defaults:
+      run:
+        working-directory: backend
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Configure database binding
+        env:
+          D1_DATABASE_ID: ${{ vars.D1_DATABASE_ID }}
+        run: |
+          node --input-type=module - <<'JS'
+          import fs from 'node:fs';
+          const id=process.env.D1_DATABASE_ID;
+          if(!/^[a-f0-9-]{36}$/i.test(id||''))throw Error('Set D1_DATABASE_ID first');
+          const file='wrangler.jsonc';const config=JSON.parse(fs.readFileSync(file,'utf8'));
+          config.d1_databases[0].database_id=id;
+          fs.writeFileSync(file,JSON.stringify(config,null,2));
+          JS
+      - name: Test request controls
+        run: node --test tests/worker.test.mjs
+      - name: Apply database migration
+        run: npx --yes wrangler@4.132.0 d1 migrations apply pradeep-portfolio-chat --remote
+      - name: Deploy backend
+        run: npx --yes wrangler@4.132.0 deploy
+      - name: Store secrets on backend only
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          TURNSTILE_SECRET_KEY: ${{ secrets.TURNSTILE_SECRET_KEY }}
+          RATE_LIMIT_SALT: ${{ secrets.RATE_LIMIT_SALT }}
+        run: |
+          python3 - <<'PY'
+          import os,json,pathlib
+          values={key:os.environ.get(key,'') for key in ['OPENAI_API_KEY','TURNSTILE_SECRET_KEY','RATE_LIMIT_SALT']}
+          if not all(values.values()) or len(values['RATE_LIMIT_SALT'])<32:
+              raise SystemExit('Required backend secrets are missing')
+          path=pathlib.Path(os.environ['RUNNER_TEMP'])/'portfolio-chat-secrets.json'
+          path.write_text(json.dumps(values))
+          path.chmod(0o600)
+          PY
+          npx --yes wrangler@4.132.0 secret bulk "$RUNNER_TEMP/portfolio-chat-secrets.json"
+      - name: Remove temporary secret file
+        if: always()
+        run: rm -f "$RUNNER_TEMP/portfolio-chat-secrets.json"

@@ -2,7 +2,20 @@
 
 A self-contained, responsive portfolio for Pradeep Muniasamy, Applied Scientist 3 at Glance. The website uses plain HTML, CSS, and JavaScript. It needs no build tools, API keys, paid services, or backend.
 
-Link - https://pradeepm18.github.io
+## Publish on GitHub Pages for free
+
+These steps use the GitHub account from your résumé: `PradeepM18`.
+
+1. Sign in to GitHub and create a **public** repository named **`pradeepm18.github.io`**. If this repository already hosts a site, back up that site before replacing its files.
+2. Unzip `Pradeep-Muniasamy-Portfolio.zip` on your device.
+3. Upload the **contents** of the extracted folder to the repository. `index.html`, `styles.css`, `script.js`, and the `assets` folder must sit at the repository root. Do not upload just the ZIP or put the website inside another folder. Keep the included `.nojekyll` file if your file picker shows it.
+4. Commit the files to the `main` branch.
+5. Open **Settings → Pages → Build and deployment**. Set **Source** to **Deploy from a branch**, choose **main** and **/(root)**, then select **Save**.
+6. Once GitHub finishes deploying, use **Visit site** on the Pages settings screen. Your address will be **https://pradeepm18.github.io/**. The first deployment can take several minutes.
+
+You can also use a different repository name, such as `portfolio`. The relative asset paths work at `https://pradeepm18.github.io/portfolio/` too; select the same branch/root publishing settings.
+
+Official guides: [Creating a GitHub Pages site](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site) and [Configuring a publishing source](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
 
 ## Open and edit locally
 
@@ -45,3 +58,13 @@ In `index.html`, locate the `writing-list` element. Copy one complete `writing-r
 - [DINO article](https://medium.com/@pradeep.muniasamy/teaching-vision-without-labels-the-evolution-of-dino-d5d81b305ca0)
 - [Segment Anything article](https://medium.com/@pradeep.muniasamy/segment-anything-a-new-era-in-promptable-image-segmentation-1b85f82b7c3c)
 - [Llama article](https://medium.com/@pradeep.muniasamy/exploring-the-basics-llama-and-working-with-them-on-locally-0aa1686a1659)
+
+## OpenAI résumé assistant — setup required
+
+The site now has an LLM-only client. The previous downloadable local model is removed. The assistant displays an honest unavailable state until a separate backend and its credentials are configured. The portfolio, résumé, and links remain usable.
+
+Read `backend/SETUP.md` for the complete deployment and GitHub Secrets steps. `backend/worker.mjs` includes server-enforced request limits, Turnstile checks, and a conservative $5 monthly reservation allowance. No real API keys are included. Only the public backend URL and Turnstile site key belong in `chat-config.js`.
+
+To update GitHub Pages, upload the extracted website files at the repository root. If replacing the previous version, delete the old `models/`, `vendor/`, `semantic-worker.mjs`, `semantic-ranking.mjs`, and `model-assets.json` files; they are no longer used. The `backend/` folder is deployable source, not a backend executable by GitHub Pages. It contains only approved public facts and no credentials.
+
+Offline security and budget checks passed. Live LLM responses require your own funded API account, a backend deployment, and real bot-verification credentials. None have been activated on your behalf.

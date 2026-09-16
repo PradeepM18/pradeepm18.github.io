@@ -113,5 +113,18 @@
     <section class="contact-section container section" id="contact" aria-labelledby="contact-title"><p class="eyebrow">05 / GET IN TOUCH</p><div class="contact-grid"><div><h2 id="contact-title">Good problems.<br><em>Let’s talk.</em></h2><p>For applied science roles, research collaborations,<br class="desktop-break"> or a conversation about building ML that works.</p></div><div class="contact-links"><a class="email-link" href="mailto:pradeepm1899@gmail.com">pradeepm1899@gmail.com <span aria-hidden="true">↗</span></a><div><a href="https://www.linkedin.com/in/pradeep-muniasamy/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://medium.com/@pradeep.muniasamy" target="_blank" rel="noopener noreferrer">Medium <span aria-hidden="true">↗</span></a><a href="https://www.kaggle.com/pradeepmuniasamy" target="_blank" rel="noopener noreferrer">Kaggle <span aria-hidden="true">↗</span></a></div></div></div></section>
   </main>
   <footer class="container site-footer"><a class="wordmark" href="#top" aria-label="Back to top">PM<span aria-hidden="true">.</span></a><p>© <span id="year">2026</span> Pradeep Muniasamy</p><a href="#top">Back to top <span aria-hidden="true">↑</span></a></footer>
+<button id="assistant-launcher" class="assistant-launcher" aria-expanded="false" aria-controls="resume-assistant">Ask about Pradeep</button>
+<aside id="resume-assistant" class="resume-assistant" aria-labelledby="assistant-title" hidden>
+ <div class="assistant-header"><h2 id="assistant-title">Ask about Pradeep</h2><button id="assistant-close" aria-label="Close résumé assistant">×</button></div>
+ <p class="assistant-caption">Ask about my public career and work. When enabled, questions are sent to OpenAI to prepare an answer. AI can make mistakes; check the linked sources. Closing this panel clears the displayed conversation.</p>
+ <p id="assistant-model-status" class="assistant-caption" role="status">The assistant is not available yet. Explore the résumé and projects below.</p><button id="assistant-retry" type="button" hidden>Retry connection</button>
+ <div class="assistant-suggestions"><button data-question="What is Pradeep’s current role?">Current role</button><button data-question="Tell me about LookSync">LookSync</button><button data-question="What papers has he published?">Papers</button><button data-question="What are his skills?">Skills</button></div>
+ <div id="assistant-challenge"></div>
+ <p class="assistant-caption"><a href="./assets/Pradeep-Muniasamy-Resume.pdf" target="_blank" rel="noopener">Read résumé ↗</a> · <a href="#work">Explore projects</a></p>
+ <div id="assistant-log" class="assistant-log" role="status" aria-live="polite" aria-atomic="true"></div>
+ <form id="assistant-form"><label for="assistant-question">Ask about the portfolio</label><div><input id="assistant-question" maxlength="500" placeholder="e.g. Tell me about user profiles" autocomplete="off" required><button type="submit">Ask</button></div></form>
+</aside>
+<script src="./chat-config.js" defer></script>
+<script src="./resume-assistant.js" defer></script>
 </body>
 </html>
