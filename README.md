@@ -2,6 +2,8 @@
 
 A self-contained, responsive portfolio for Pradeep Muniasamy, Applied Scientist 3 at Glance. The website uses plain HTML, CSS, and JavaScript. It needs no build tools, API keys, paid services, or backend.
 
+Link - https://pradeepm18.github.io
+
 ## Open and edit locally
 
 Open `index.html` in a browser. Navigation, expandable project details, images, article links, and the résumé link work without a server.
