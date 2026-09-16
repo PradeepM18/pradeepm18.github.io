@@ -2,16 +2,7 @@
 
 A self-contained, responsive portfolio for Pradeep Muniasamy, Applied Scientist 3 at Glance. The website uses plain HTML, CSS, and JavaScript. It needs no build tools, API keys, paid services, or backend.
 
-## Publish on GitHub Pages for free
-
-These steps use the GitHub account from your résumé: `PradeepM18`.
-
-1. Sign in to GitHub and create a **public** repository named **`pradeepm18.github.io`**. If this repository already hosts a site, back up that site before replacing its files.
-2. Unzip `Pradeep-Muniasamy-Portfolio.zip` on your device.
-3. Upload the **contents** of the extracted folder to the repository. `index.html`, `styles.css`, `script.js`, and the `assets` folder must sit at the repository root. Do not upload just the ZIP or put the website inside another folder. Keep the included `.nojekyll` file if your file picker shows it.
-4. Commit the files to the `main` branch.
-5. Open **Settings → Pages → Build and deployment**. Set **Source** to **Deploy from a branch**, choose **main** and **/(root)**, then select **Save**.
-6. Once GitHub finishes deploying, use **Visit site** on the Pages settings screen. Your address will be **https://pradeepm18.github.io/**. The first deployment can take several minutes.
+Link - **https://pradeepm18.github.io/** 
 
 You can also use a different repository name, such as `portfolio`. The relative asset paths work at `https://pradeepm18.github.io/portfolio/` too; select the same branch/root publishing settings.
 
